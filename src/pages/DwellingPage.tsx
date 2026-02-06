@@ -1,75 +1,148 @@
-import React from 'react'
-import { applicants } from '../data/applicants' 
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+// Asegúrate de que este archivo exista como acordamos
+import type { Dwelling } from '../types/dwellings';
 
 function DwellingPage() {
+  // Estado para guardar las viviendas traídas de la API
+  const [dwellings, setDwellings] = useState<Dwelling[]>([]);
+  // Estado para manejar la carga visual
+  const [loading, setLoading] = useState(true);
 
-  const candidatos = Array.from(new Set(applicants.map((applicant) => applicant.name))).sort();
+  // Hook de efecto para cargar los datos al entrar en la página
+  useEffect(() => {
+    fetch('http://localhost:8080/dwellings')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Error en la respuesta del servidor');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setDwellings(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error cargando las viviendas:", error);
+        setLoading(false);
+      });
+  }, []);
+
+  // Vista de carga
+  if (loading) {
+    return (
+      <div style={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        height: '50vh', 
+        color: '#1D3557',
+        fontSize: '1.2rem',
+        fontFamily: 'system-ui, sans-serif'
+      }}>
+        Cargando parque de viviendas...
+      </div>
+    );
+  }
 
   return (
-    
     <div style={{ 
       display: 'flex', 
       flexDirection: 'column', 
       alignItems: 'center', 
-      justifyContent: 'center', 
-      minHeight: '10vh', 
+      justifyContent: 'flex-start', 
+      minHeight: 'calc(100vh - 140px)', 
       width: '100%',
       padding: '40px 20px',
       boxSizing: 'border-box',
-      backgroundColor: '#f9f9f9' 
+      backgroundColor: '#F1FAEE' // Fondo general crema claro
     }}>
       
       <div style={{ textAlign: 'center', maxWidth: '1200px', width: '100%' }}>
-        <h1 style={{ marginBottom: '10px' }}>Listado de Solicitantes</h1>
-                
+        <h1 style={{ marginBottom: '30px', color: "#1D3557", fontSize: "2.5rem" }}>
+          Parque de Viviendas
+        </h1>
+        
+        {/* Mensaje si no hay datos */}
+        {dwellings.length === 0 && (
+            <div style={{ 
+                padding: '20px', 
+                backgroundColor: '#fff', 
+                borderRadius: '10px', 
+                color: '#457B9D',
+                boxShadow: '0 4px 6px rgba(0,0,0,0.05)'
+            }}>
+                No se encontraron viviendas registradas en el sistema.
+            </div>
+        )}
+
+        {/* Rejilla de Tarjetas */}
         <div style={{ 
           display: 'grid', 
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
           gap: '25px', 
-          marginTop: '30px',
           justifyContent: 'center' 
         }}>
-          {applicants.map((applicant) => (
-            <div key={applicant.id} style={{
-              border: '1px solid #e0e0e0',
+          {dwellings.map((dwelling) => (
+            <div key={dwelling.id} style={{
+              border: '1px solid #A8DADC', // Borde azul claro
               borderRadius: '15px',
-              padding: '20px',
-              boxShadow: '0 10px 15px -3px rgba(0,0,0,0.1)',
+              padding: '25px',
+              boxShadow: '0 4px 8px rgba(29, 53, 87, 0.08)', // Sombra suave
               backgroundColor: '#fff',
               textAlign: 'left', 
-              transition: 'transform 0.2s',
+              transition: 'transform 0.2s, box-shadow 0.2s',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between'
             }}>
-            <h3 style={{ margin: '0 0 12px 0', fontSize: '1.2rem' }}>
-                <NavLink
-                    to={`/applicants/${applicant.id}`}
-                    style={() => ({color: 'black'})}
-                >
-                    {applicant.name} {applicant.surname}
-                </NavLink>                
-            </h3>
-              
-              <div style={{ fontSize: '14px', lineHeight: '1.6' }}>
-                <p><strong>DNI:</strong> {applicant.dni}</p>
-                <p><strong>Salario:</strong> {applicant.salary}€</p>
-                <p><strong>Miembros familiares:</strong> {applicant.family_members} pers.</p>
+              <div>
+                <h3 style={{ margin: '0 0 15px 0', fontSize: '1.3rem' }}>
+                    {/* Enlace dinámico al detalle de la vivienda */}
+                    <NavLink
+                        to={`/dwellings/${dwelling.id}`}
+                        style={() => ({
+                            color: '#1D3557', // Azul oscuro
+                            textDecoration: 'none',
+                            fontWeight: 700
+                        })}
+                    >
+                        {dwelling.street}
+                    </NavLink>                
+                </h3>
                 
+                <div style={{ fontSize: '15px', lineHeight: '1.6', color: "#457B9D" }}>
+                  <p style={{margin: '5px 0'}}><strong>Ciudad:</strong> {dwelling.city}</p>
+                  <p style={{margin: '5px 0'}}><strong>Tipo:</strong> {dwelling.type}</p>
+                  <p style={{margin: '5px 0'}}><strong>Habitaciones:</strong> {dwelling.room}</p>
+                </div>
+              </div>
+
+              <div>
                 <div style={{ 
-                  marginTop: '15px', 
+                  marginTop: '20px', 
                   padding: '10px', 
                   borderRadius: '8px', 
                   textAlign: 'center',
                   fontWeight: 'bold',
                   letterSpacing: '0.5px',
-                  backgroundColor: applicant.employed === 1 ? '#dcfce7' : '#fee2e2',
-                  color: applicant.employed === 1 ? '#166534' : '#991b1b'
+                  // Lógica visual de disponibilidad
+                  backgroundColor: dwelling.available ? '#A8DADC' : '#FEE2E2',
+                  color: dwelling.available ? '#1D3557' : '#991B1B'
                 }}>
-                  {applicant.employed === 1 ? 'ACTIVO' : 'DESEMPLEADO'}
+                  {dwelling.available ? 'DISPONIBLE' : 'OCUPADA'}
                 </div>
-              </div>
-              
-              <div style={{ marginTop: '15px', fontSize: '11px', color: '#aaa', borderTop: '1px solid #eee', paddingTop: '10px' }}>
-                Referencia Vivienda: #{applicant.dwelling_id}
+                
+                <div style={{ 
+                    marginTop: '15px', 
+                    fontSize: '12px', 
+                    color: '#A8DADC', 
+                    borderTop: '1px solid #F1FAEE', 
+                    paddingTop: '10px',
+                    textAlign: 'right'
+                }}>
+                  Construcción: {dwelling.buildDate}
+                </div>
               </div>
             </div>
           ))}
@@ -79,4 +152,4 @@ function DwellingPage() {
   )
 }
 
-export default DwellingPage
+export default DwellingPage;

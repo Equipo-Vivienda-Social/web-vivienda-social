@@ -6,7 +6,6 @@ export default function Home() {
           height: "calc(100vh - 290px)",
           margin: "40px auto",
           padding: "40px",
-          background: "white",
           borderRadius: "16px",
           boxShadow: "0 6px 20px rgba(0,0,0,0.08)",
           textAlign: "center",

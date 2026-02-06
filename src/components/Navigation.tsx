@@ -29,20 +29,7 @@ export default function Navigation() {
 
       {/* Ruta para la lista de personas */}
       <NavLink
-        to="/applicants"
-        style={({ isActive }) => ({
-          color: "white",
-          textDecoration: "none",
-          padding: "6px 12px",
-          borderRadius: "6px",
-          backgroundColor: isActive ? "rgba(255,255,255,0.2)" : "transparent",
-        })}
-      >
-        Solicitantes
-      </NavLink>
-      
-      <NavLink
-        to="/dwellings" 
+        to="/dwellings"
         style={({ isActive }) => ({
           color: "white",
           textDecoration: "none",
@@ -52,6 +39,19 @@ export default function Navigation() {
         })}
       >
         Viviendas
+      </NavLink>
+      
+      <NavLink
+        to="/applicants" 
+        style={({ isActive }) => ({
+          color: "white",
+          textDecoration: "none",
+          padding: "6px 12px",
+          borderRadius: "6px",
+          backgroundColor: isActive ? "rgba(255,255,255,0.2)" : "transparent",
+        })}
+      >
+        Solicitantes
       </NavLink>
     </nav>
   );
