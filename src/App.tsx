@@ -10,21 +10,19 @@ import Home from './pages/HomePage'
 import Applicants from './pages/DwellingPage'
 import DwellingPage from './pages/DwellingPage'
 import ApplicantPage from './pages/ApplicantPage'
+import Navbar from './components/Navbar'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  
   return (
     <>
-      <Header />
-      <BrowserRouter>
-        <Navigation />
+      <Navbar />
+
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/dwellings' element={<DwellingPage />} />
           <Route path='/applicant' element={<ApplicantPage/>}/>
         </Routes>
-      </BrowserRouter>
       <Footer />
     </>
   )
