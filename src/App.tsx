@@ -8,6 +8,7 @@ import Footer from './components/Footer'
 import Navigation from './components/Navigation'
 import Home from './pages/HomePage'
 import Applicants from './pages/DwellingPage'
+import DwellingPage from './pages/DwellingPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -19,7 +20,7 @@ function App() {
         <Navigation />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/applicants' element={<Applicants />} />
+          <Route path='/dwellings' element={<DwellingPage />} />
         </Routes>
       </BrowserRouter>
       <Footer />
