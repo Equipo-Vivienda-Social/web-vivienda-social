@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 // Asegúrate de que este archivo exista como acordamos
-import type { Dwelling } from '../types/dwellings';
+import type { Dwelling } from '../types/user-data';
 
 function DwellingPage() {
   // Estado para guardar las viviendas traídas de la API

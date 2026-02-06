@@ -9,6 +9,7 @@ import Navigation from './components/Navigation'
 import Home from './pages/HomePage'
 import Applicants from './pages/DwellingPage'
 import DwellingPage from './pages/DwellingPage'
+import ApplicantPage from './pages/ApplicantPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -21,6 +22,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/dwellings' element={<DwellingPage />} />
+          <Route path='/applicant' element={<ApplicantPage/>}/>
         </Routes>
       </BrowserRouter>
       <Footer />
