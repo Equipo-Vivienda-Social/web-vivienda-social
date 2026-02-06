@@ -44,14 +44,14 @@ function ApplicantPage() {
   return (
     <div style={{
         display: 'flex', 
-      flexDirection: 'column', 
-      alignItems: 'center', 
-      justifyContent: 'flex-start', 
-      minHeight: 'calc(100vh - 140px)', 
-      width: '100%',
-      padding: '40px 20px',
-      boxSizing: 'border-box',
-      backgroundColor: '#F1FAEE' // Fondo general crema claro
+        flexDirection: 'column', 
+        alignItems: 'center', 
+        justifyContent: 'flex-start', 
+        minHeight: 'calc(100vh - 140px)', 
+        width: '100%',
+        padding: '40px 20px',
+        boxSizing: 'border-box',
+        backgroundColor: '#F1FAEE' // Fondo general crema claro
     }}>
         <div style={{ textAlign: 'center', maxWidth: '1200px', width: '100%' }}>
             <h1 style={{ marginBottom: '30px', color: "#1D3557", fontSize: "2.5rem" }}>
