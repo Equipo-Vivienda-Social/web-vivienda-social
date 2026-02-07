@@ -31,9 +31,9 @@ function DwellingPage() {
         // APLICAMOS ORDENAMIENTO EN FRONTEND
         let processedData = [...data];
         if (sortOrder === "asc") {
-          processedData.sort((a, b) => a.street.localeCompare(b.street));
+          processedData.sort((a, b) => a.city.localeCompare(b.city));
         } else if (sortOrder === "desc") {
-          processedData.sort((a, b) => b.street.localeCompare(a.street));
+          processedData.sort((a, b) => b.city.localeCompare(a.city));
         }
         
         setDwellings(processedData);
@@ -82,8 +82,8 @@ function DwellingPage() {
               style={{...inputStyle, border: "2px solid #457B9D"}}
             >
                 <option value="none">Sin orden específico</option>
-                <option value="asc">Orden: A-Z (Calle)</option>
-                <option value="desc">Orden: Z-A (Calle)</option>
+                <option value="asc">Orden: A-Z (Ciudad)</option>
+                <option value="desc">Orden: Z-A (Ciudad)</option>
             </select>
 
             <button onClick={fetchDwellings} style={{ backgroundColor: "#1D3557", color: "white", border: "none", padding: "10px 20px", borderRadius: "6px", cursor: "pointer", fontWeight: "bold" }}>Buscar</button>
