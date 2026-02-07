@@ -5,8 +5,8 @@ export default function Home() {
     <div
       style={{
         width: "100%",
-        minHeight: "calc(100vh - 80px)", // Restamos la altura del Navbar
-        backgroundColor: "#F1FAEE", // Tu color crema claro
+        minHeight: "calc(100vh - 80px)", 
+        backgroundColor: "#F1FAEE", 
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -19,7 +19,7 @@ export default function Home() {
           maxWidth: "1200px",
           width: "100%",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", // Diseño responsivo (columnas)
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", 
           gap: "60px",
           alignItems: "center",
         }}
@@ -54,13 +54,7 @@ export default function Home() {
           </h1>
 
           <p
-            style={{
-              fontSize: "1.2rem",
-              color: "#555",
-              lineHeight: "1.6",
-              marginBottom: "40px",
-              maxWidth: "500px"
-            }}
+            style={{fontSize: "1.2rem", color: "#555", lineHeight: "1.6", marginBottom: "40px", maxWidth: "500px"}}
           >
             Administra el parque inmobiliario municipal y gestiona las solicitudes ciudadanas desde una plataforma centralizada y transparente.
           </p>
@@ -68,31 +62,14 @@ export default function Home() {
           <div style={{ display: "flex", gap: "16px" }}>
             <Link
               to="/dwellings"
-              style={{
-                padding: "14px 28px",
-                backgroundColor: "#E63946", // Un color de acento (Rojo coral) para llamar la atención
-                color: "white",
-                borderRadius: "8px",
-                textDecoration: "none",
-                fontWeight: 600,
-                boxShadow: "0 4px 14px rgba(230, 57, 70, 0.3)",
-                transition: "transform 0.2s"
-              }}
+              style={{padding: "14px 28px", backgroundColor: "#F4A261", color: "white", borderRadius: "8px", textDecoration: "none", fontWeight: 600, boxShadow: "0 4px 14px rgba(230, 57, 70, 0.3)", transition: "transform 0.2s"}}
             >
               Ver Viviendas
             </Link>
             
             <Link
               to="/applicants"
-              style={{
-                padding: "14px 28px",
-                backgroundColor: "#fff",
-                color: "#1D3557",
-                border: "2px solid #1D3557",
-                borderRadius: "8px",
-                textDecoration: "none",
-                fontWeight: 600
-              }}
+              style={{padding: "14px 28px", backgroundColor: "#fff", color: "#1D3557", border: "2px solid #1D3557", borderRadius: "8px", textDecoration: "none", fontWeight: 600}}
             >
               Gestionar Solicitudes
             </Link>
