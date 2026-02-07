@@ -79,7 +79,7 @@ export default function DwellingDetails() {
                 padding: "8px 16px",
                 borderRadius: "20px",
                 fontWeight: "bold",
-                backgroundColor: dwelling.available ? "#A8DADC" : "#E63946",
+                backgroundColor: dwelling.available ? "#A8DADC" : "#F4A261",
                 color: dwelling.available ? "#1D3557" : "white",
                 letterSpacing: "1px",
                 fontSize: "0.9rem"
