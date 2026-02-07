@@ -67,7 +67,7 @@ export default function ApplicantDetails() {
                 <h3 style={{ borderBottom: "2px solid #A8DADC", paddingBottom: "10px", color: "#1D3557" }}>Perfil Socioeconómico</h3>
                 <ul style={{ listStyle: "none", padding: 0, fontSize: "1rem", lineHeight: "2.2" }}>
                     <li style={{ borderBottom: "1px solid #eee" }}><strong>Ingresos Anuales:</strong> {applicant.salary} €</li>
-                    <li style={{ borderBottom: "1px solid #eee" }}><strong>Unidad Familiar:</strong> {applicant.familyMenbers} personas</li>
+                    <li style={{ borderBottom: "1px solid #eee" }}><strong>Unidad Familiar:</strong> {applicant.familyMembers} personas</li>
                     <li style={{ borderBottom: "1px solid #eee" }}>
                         <strong>Situación Laboral:</strong> 
                         <span style={{ marginLeft: "10px", color: applicant.employed ? "green" : "red", fontWeight: "bold" }}>
@@ -83,7 +83,7 @@ export default function ApplicantDetails() {
                 
                 {assignedDwelling ? (
                     <div>
-                        <div style={{ color: "#2A9D8F", fontWeight: "bold", marginBottom: "10px" }}>✅ VIVIENDA ASIGNADA</div>
+                        <div style={{ color: "#2A9D8F", fontWeight: "bold", marginBottom: "10px" }}>VIVIENDA ASIGNADA</div>
                         <p style={{ fontSize: "0.9rem", color: "#555" }}>Reside actualmente en:</p>
                         <div style={{ fontSize: "1.1rem", fontWeight: "bold", color: "#1D3557", margin: "10px 0" }}>
                             {assignedDwelling.street}, {assignedDwelling.city}
