@@ -36,7 +36,7 @@ export default function Home() {
               fontWeight: 700, 
               marginBottom: "20px"
           }}>
-              NUEVA CONVOCATORIA 2026
+              NEW CALL FOR APPLICATIONS 2026
           </div>
           
           <h1
@@ -49,14 +49,14 @@ export default function Home() {
               fontWeight: 800
             }}
           >
-            Gestión de vivienda <br/>
-            <span style={{ color: "#457B9D" }}>pública y justa.</span>
+            Dwelling management <br/>
+            <span style={{ color: "#457B9D" }}>public and fair.</span>
           </h1>
 
           <p
             style={{fontSize: "1.2rem", color: "#555", lineHeight: "1.6", marginBottom: "40px", maxWidth: "500px"}}
           >
-            Administra el parque inmobiliario municipal y gestiona las solicitudes ciudadanas desde una plataforma centralizada y transparente.
+            Manage the municipal property portfolio and handle citizen requests from a centralised and transparent platform.
           </p>
 
           <div style={{ display: "flex", gap: "16px" }}>
@@ -64,14 +64,14 @@ export default function Home() {
               to="/dwellings"
               style={{padding: "14px 28px", backgroundColor: "#F4A261", color: "white", borderRadius: "8px", textDecoration: "none", fontWeight: 600, boxShadow: "0 4px 14px rgba(230, 57, 70, 0.3)", transition: "transform 0.2s"}}
             >
-              Ver Viviendas
+              View Dwellings
             </Link>
             
             <Link
               to="/applicants"
               style={{padding: "14px 28px", backgroundColor: "#fff", color: "#1D3557", border: "2px solid #1D3557", borderRadius: "8px", textDecoration: "none", fontWeight: 600}}
             >
-              Gestionar Solicitudes
+              Manage Applicants
             </Link>
           </div>
         </div>
@@ -110,7 +110,7 @@ export default function Home() {
                 <div style={{ fontSize: "2rem" }}>🏠</div>
                 <div>
                     <div style={{ fontWeight: "bold", color: "#1D3557" }}>+1,200</div>
-                    <div style={{ fontSize: "0.8rem", color: "#888" }}>Familias alojadas</div>
+                    <div style={{ fontSize: "0.8rem", color: "#888" }}>Host families</div>
                 </div>
             </div>
         </div>

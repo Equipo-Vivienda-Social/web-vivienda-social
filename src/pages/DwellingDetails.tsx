@@ -24,8 +24,8 @@ export default function DwellingDetails() {
         });
     }, [id]);
 
-    if (loading) return <div style={{ padding: "40px", textAlign: "center", color: "#1D3557" }}>Cargando ficha técnica...</div>;
-    if (!dwelling) return <div style={{ padding: "40px", textAlign: "center" }}>Vivienda no encontrada.</div>;
+    if (loading) return <div style={{ padding: "40px", textAlign: "center", color: "#1D3557" }}>Loading technical specifications...</div>;
+    if (!dwelling) return <div style={{ padding: "40px", textAlign: "center" }}>Dwelling Not Found.</div>;
 
     return (
         <div style={{
@@ -47,7 +47,7 @@ export default function DwellingDetails() {
                 fontWeight: 600,
                 marginBottom: "20px"
             }}>
-            ← Volver al listado
+            ← Back To List
             </Link>
 
             {/* TARJETA PRINCIPAL (Ley de Figura y Fondo) */}
@@ -84,7 +84,7 @@ export default function DwellingDetails() {
                 letterSpacing: "1px",
                 fontSize: "0.9rem"
                 }}>
-                {dwelling.available ? "DISPONIBLE" : "OCUPADA"}
+                {dwelling.available ? "AVAILABLE" : "OCCUPIED"}
                 </div>
             </div>
 
@@ -94,20 +94,20 @@ export default function DwellingDetails() {
                 {/* SECCIÓN 1: ESPECIFICACIONES (Ley de Región Común) */}
                 <div>
                 <h3 style={{ borderBottom: "2px solid #A8DADC", paddingBottom: "10px", color: "#1D3557" }}>
-                    Especificaciones
+                    Specifications
                 </h3>
                 <ul style={{ listStyle: "none", padding: 0, fontSize: "1rem", lineHeight: "2" }}>
                     <li style={{ borderBottom: "1px solid #eee" }}>
-                    <strong>Tipo de inmueble:</strong> {dwelling.type}
+                    <strong>Type of property:</strong> {dwelling.type}
                     </li>
                     <li style={{ borderBottom: "1px solid #eee" }}>
-                    <strong>Habitaciones:</strong> {dwelling.room}
+                    <strong>Rooms:</strong> {dwelling.room}
                     </li>
                     <li style={{ borderBottom: "1px solid #eee" }}>
-                    <strong>Año de construcción:</strong> {dwelling.buildDate}
+                    <strong>Build Date:</strong> {dwelling.buildDate}
                     </li>
                     <li style={{ borderBottom: "1px solid #eee" }}>
-                    <strong>Certificado Energético:</strong> B (Estimado)
+                    <strong>Energy Performance Certificate:</strong> B (Estimated)
                     </li>
                 </ul>
                 </div>
@@ -119,11 +119,11 @@ export default function DwellingDetails() {
                     borderRadius: "12px",
                     border: "1px dashed #A8DADC"
                 }}>
-                <h3 style={{ marginTop: 0, color: "#1D3557" }}>Información de Ocupación</h3>
+                <h3 style={{ marginTop: 0, color: "#1D3557" }}>Occupancy Information</h3>
                 
                 {dwelling.available ? (
                     <div style={{ textAlign: "center", color: "#457B9D", padding: "20px" }}>
-                        <p>Esta vivienda está lista para ser asignada.</p>
+                        <p>This property is ready to be allocated.</p>
                         <Link to="/applicants" style={{ 
                             display: "inline-block",
                             marginTop: "10px",
@@ -134,13 +134,13 @@ export default function DwellingDetails() {
                             borderRadius: "6px",
                             fontSize: "0.9rem"
                         }}>
-                            Asignar Solicitante
+                            Assign Applicant
                         </Link>
                     </div>
                 ) : (
                     // Si está ocupada y hay datos del inquilino (asumiendo dwelling.applicants no es nulo)
                     <div>
-                        <p style={{ marginBottom: "5px", fontSize: "0.9rem", color: "#666" }}>Inquilino titular:</p>
+                        <p style={{ marginBottom: "5px", fontSize: "0.9rem", color: "#666" }}>Applicant in possession:</p>
                         
                         {/* Comprobamos si el array existe y tiene al menos 1 persona */}
                         {dwelling.applicants && dwelling.applicants.length > 0 ? (
@@ -151,18 +151,18 @@ export default function DwellingDetails() {
                                 {/* Si hay más gente empadronada, lo indicamos */}
                                 {dwelling.applicants.length > 1 && (
                                     <span style={{ fontSize: "0.8rem", fontWeight: "normal", color: "#666", marginLeft: "8px" }}>
-                                        (+{dwelling.applicants.length - 1} convivientes)
+                                        (+{dwelling.applicants.length - 1} cohabitants)
                                     </span>
                                 )}
                             </div>
                         ) : (
                             <span style={{color: "red"}}>
-                                Error: La casa consta como ocupada pero no tiene inquilinos asignados.
+                                Error: The property is listed as occupied but has no tenants assigned to it.
                             </span>
                         )}
                         
                         <p style={{ fontSize: "0.9rem", marginTop: "15px" }}>
-                            <strong>Estado del contrato:</strong> Vigente
+                            <strong>Contract status:</strong> Valid
                         </p>
                     </div>
                 )}

@@ -19,8 +19,6 @@ function ApplicantPage() {
             
             if (filterEmployed !== "all") params.append("employed", filterEmployed);
             if (filterFamily) params.append("familyMembers", filterFamily);
-            // Nota: No enviamos salary al backend para poder filtrar por "Mayor que" en el frontend
-            // Si quisieras exacto: if (filterSalary) params.append("salary", filterSalary);
 
             fetch(`http://localhost:8080/applicants?${params.toString()}`)
             .then((response) => {
@@ -28,7 +26,7 @@ function ApplicantPage() {
                 return response.json();
             })
             .then((data: Applicant[]) => {
-                // Lógica Frontend: Filtrar salario mayor o igual que X
+                // Lógica Frontend: Filtrar salario mayor o igual que X pj: 1500€
                 let filteredData = data;
                 if (filterSalary) {
                     const minSalary = parseInt(filterSalary);
@@ -39,7 +37,6 @@ function ApplicantPage() {
                 setLoading(false);
             })
             .catch((error) => {
-                console.error("Error cargando los solicitantes:", error);
                 setLoading(false);
             });
         };
@@ -64,7 +61,7 @@ function ApplicantPage() {
         if (loading) {
             return (
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh', color: '#1D3557' }}>
-                    Cargando listado de solicitantes...
+                    Loading Applicants list...
                 </div>
             );
         }
@@ -75,7 +72,7 @@ function ApplicantPage() {
         }}>
             <div style={{ textAlign: 'center', maxWidth: '1200px', width: '100%' }}>
                 <h1 style={{ marginBottom: '20px', color: "#1D3557", fontSize: "2.5rem" }}>
-                    Ciudadanos Solicitantes
+                Applicant Citizens
                 </h1>
                 
                 {/* --- BARRA DE FILTROS --- */}
@@ -97,21 +94,21 @@ function ApplicantPage() {
                         onChange={(e) => setFilterEmployed(e.target.value)}
                         style={inputStyle}
                     >
-                        <option value="all">Situación Laboral (Todos)</option>
-                        <option value="true">Con Empleo</option>
-                        <option value="false">Desempleado</option>
+                        <option value="all">Employment Status (All)</option>
+                        <option value="true">Employed</option>
+                        <option value="false">Unemployed</option>
                     </select>
 
                     <input 
                         type="number" 
-                        placeholder="Miembros familiares" 
+                        placeholder="Family members" 
                         value={filterFamily}
                         onChange={(e) => setFilterFamily(e.target.value)}
                         style={{...inputStyle, width: "160px"}}
                     />
 
                     <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                        <span style={{fontSize: "0.9rem", color: "#457B9D"}}>Salario {'>'} : </span>
+                        <span style={{fontSize: "0.9rem", color: "#457B9D"}}>Salary {'>'} : </span>
                         <input 
                             type="number" 
                             placeholder="Ej: 1500" 
@@ -134,14 +131,14 @@ function ApplicantPage() {
                             fontWeight: "bold"
                         }}
                     >
-                        Filtrar
+                        Search
                     </button>
                 </div>
                 {/* --- FIN BARRA DE FILTROS --- */}
 
                 {applicants.length === 0 && (
                     <div style={{ padding: '20px', backgroundColor: '#fff', borderRadius: '10px', color: '#457B9D' }}>
-                        No se encontraron solicitantes con esos criterios.
+                        Applicants Not Found.
                     </div>
                 )}
 
@@ -167,8 +164,8 @@ function ApplicantPage() {
                                     DNI/NIE: <strong>{applicant.dni}</strong>
                                 </div>
                                 <div style={{ fontSize: '15px', lineHeight: '1.6', color: "#457B9D" }}>
-                                    <p style={{margin: '5px 0'}}><strong>Familia:</strong> {applicant.familyMembers} miembros</p>
-                                    <p style={{margin: '5px 0'}}><strong>Ingresos:</strong> {applicant.salary?.toLocaleString()} €/año</p>
+                                    <p style={{margin: '5px 0'}}><strong>Family:</strong> {applicant.familyMembers} members</p>
+                                    <p style={{margin: '5px 0'}}><strong>Salary:</strong> {applicant.salary?.toLocaleString()} €/monthly</p>
                                 </div>
                             </div>
                             <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'flex-end' }}>
@@ -178,7 +175,7 @@ function ApplicantPage() {
                                     color: applicant.employed ? '#2A9D8F' : '#666',
                                     border: applicant.employed ? '1px solid #2A9D8F' : '1px solid #ccc'
                                 }}>
-                                    {applicant.employed ? 'CON EMPLEO' : 'DESEMPLEADO'}
+                                    {applicant.employed ? 'EMPLOYED' : 'UNEMPLOYED'}
                                 </span>
                             </div>
                         </div>

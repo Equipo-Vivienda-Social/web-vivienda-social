@@ -5,11 +5,11 @@ import type { Applicant, Dwelling } from '../types/user-data';
 export default function ApplicantDetails() {
     const { id } = useParams<{ id: string }>();
     const [applicant, setApplicant] = useState<Applicant | null>(null);
-    const [assignedDwelling, setAssignedDwelling] = useState<Dwelling | null>(null); // Para guardar su casa si tiene
+    const [assignedDwelling, setAssignedDwelling] = useState<Dwelling | null>(null); 
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // 1. Cargar datos del solicitante
+        
         fetch(`http://localhost:8080/applicants/${id}`)
         .then(res => {
             if (!res.ok) throw new Error("Error fetching applicant");
@@ -17,13 +17,11 @@ export default function ApplicantDetails() {
         })
         .then(data => {
             setApplicant(data);
-            // 2. Una vez tenemos el usuario, miramos si tiene casa asignada
-            // Nota: Tu controller tiene este endpoint preparado: /applicants/{id}/dwelling
             return fetch(`http://localhost:8080/applicants/${id}/dwelling`);
         })
         .then(res => {
             if (res.ok) return res.json();
-            return null; // Si devuelve 404 o vacío, es que no tiene casa
+            return null; 
         })
         .then(dwellingData => {
             if (dwellingData) setAssignedDwelling(dwellingData);
@@ -35,15 +33,15 @@ export default function ApplicantDetails() {
         });
     }, [id]);
 
-    if (loading) return <div style={{ padding: "40px", textAlign: "center", color: "#1D3557" }}>Cargando expediente...</div>;
-    if (!applicant) return <div style={{ padding: "40px", textAlign: "center" }}>Solicitante no encontrado.</div>;
+    if (loading) return <div style={{ padding: "40px", textAlign: "center", color: "#1D3557" }}>Loading Record...</div>;
+    if (!applicant) return <div style={{ padding: "40px", textAlign: "center" }}>Applicant Not Found.</div>;
 
     return (
         <div style={{ backgroundColor: "#F1FAEE", minHeight: "calc(100vh - 80px)", padding: "40px 20px", display: "flex", justifyContent: "center" }}>
         <div style={{ maxWidth: "900px", width: "100%" }}>
             
             <Link to="/applicants" style={{ display: "inline-flex", alignItems: "center", gap: "8px", textDecoration: "none", color: "#457B9D", fontWeight: 600, marginBottom: "20px" }}>
-            ← Volver al listado
+            ← Back To List
             </Link>
 
             {/* TARJETA PRINCIPAL */}
@@ -64,14 +62,14 @@ export default function ApplicantDetails() {
                 
                 {/* SECCIÓN DATOS ECONÓMICOS (Región Común) */}
                 <div>
-                <h3 style={{ borderBottom: "2px solid #A8DADC", paddingBottom: "10px", color: "#1D3557" }}>Perfil Socioeconómico</h3>
+                <h3 style={{ borderBottom: "2px solid #A8DADC", paddingBottom: "10px", color: "#1D3557" }}>Socio-economic Profile</h3>
                 <ul style={{ listStyle: "none", padding: 0, fontSize: "1rem", lineHeight: "2.2" }}>
-                    <li style={{ borderBottom: "1px solid #eee" }}><strong>Ingresos Anuales:</strong> {applicant.salary} €</li>
-                    <li style={{ borderBottom: "1px solid #eee" }}><strong>Unidad Familiar:</strong> {applicant.familyMembers} personas</li>
+                    <li style={{ borderBottom: "1px solid #eee" }}><strong>Salary:</strong> {applicant.salary} €/monthly</li>
+                    <li style={{ borderBottom: "1px solid #eee" }}><strong>Family Members:</strong> {applicant.familyMembers} members</li>
                     <li style={{ borderBottom: "1px solid #eee" }}>
-                        <strong>Situación Laboral:</strong> 
+                        <strong>Employment Status:</strong> 
                         <span style={{ marginLeft: "10px", color: applicant.employed ? "green" : "red", fontWeight: "bold" }}>
-                            {applicant.employed ? "ACTIVO" : "DESEMPLEADO"}
+                            {applicant.employed ? "EMPLOYED" : "UNEMPLOYED"}
                         </span>
                     </li>
                 </ul>
@@ -79,27 +77,27 @@ export default function ApplicantDetails() {
 
                 {/* SECCIÓN ESTADO VIVIENDA (Destacado) */}
                 <div style={{ backgroundColor: "#F0F4F8", padding: "25px", borderRadius: "12px", border: "1px solid #DCE6F1" }}>
-                <h3 style={{ marginTop: 0, color: "#1D3557" }}>Estado de Asignación</h3>
+                <h3 style={{ marginTop: 0, color: "#1D3557" }}>Allocation Status</h3>
                 
                 {assignedDwelling ? (
                     <div>
-                        <div style={{ color: "#2A9D8F", fontWeight: "bold", marginBottom: "10px" }}>VIVIENDA ASIGNADA</div>
-                        <p style={{ fontSize: "0.9rem", color: "#555" }}>Reside actualmente en:</p>
+                        <div style={{ color: "#2A9D8F", fontWeight: "bold", marginBottom: "10px" }}>ALLOCATED DWELLING</div>
+                        <p style={{ fontSize: "0.9rem", color: "#555" }}>Currently resides in:</p>
                         <div style={{ fontSize: "1.1rem", fontWeight: "bold", color: "#1D3557", margin: "10px 0" }}>
                             {assignedDwelling.street}, {assignedDwelling.city}
                         </div>
                         <Link to={`/dwellings/${assignedDwelling.id}`} style={{ textDecoration: "underline", color: "#457B9D", fontSize: "0.9rem" }}>
-                            Ver detalles del inmueble
+                            Dwelling Details
                         </Link>
                     </div>
                 ) : (
                     <div>
-                        <div style={{ color: "#E63946", fontWeight: "bold", marginBottom: "10px" }}>⏳ EN LISTA DE ESPERA</div>
+                        <div style={{ color: "#E63946", fontWeight: "bold", marginBottom: "10px" }}>ON THE WAITING LIST</div>
                         <p style={{ fontSize: "0.9rem", color: "#555" }}>
-                            Este solicitante cumple los requisitos pero aún no tiene un inmueble asignado.
+                        This applicant meets the requirements but does not yet have a property assigned.
                         </p>
                         <button style={{ marginTop: "15px", width: "100%", padding: "10px", backgroundColor: "#1D3557", color: "white", border: "none", borderRadius: "6px", cursor: "pointer" }}>
-                            Buscar Vivienda Compatible
+                        Search for Compatible Dwelling
                         </button>
                     </div>
                 )}
