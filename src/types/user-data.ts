@@ -17,5 +17,5 @@ export interface Dwelling {
     room: number;
     available: boolean;
     buildDate: string;
-    applicants: Applicant;
+    applicants: Applicant[];
 }
