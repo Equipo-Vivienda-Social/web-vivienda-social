@@ -59,7 +59,7 @@ export default function Navbar() {
                     Vivienda Social
                 </span>
                 <span style={{ color: "#A8DADC", fontSize: "0.75rem", letterSpacing: "0.5px" }}>
-                    GESTIÓN MUNICIPAL
+                    MUNICIPAL MANAGEMENT
                 </span>
             </div>
         </div>
@@ -67,13 +67,13 @@ export default function Navbar() {
         {/* SECCIÓN MENÚ DE NAVEGACIÓN */}
         <div style={{ display: "flex", gap: "8px" }}>
             <NavLink to="/" style={linkStyle}>
-            Inicio
+            Home
             </NavLink>
             <NavLink to="/dwellings" style={linkStyle}>
-            Viviendas
+            Dwellings
             </NavLink>
             <NavLink to="/applicants" style={linkStyle}>
-            Solicitantes
+            Applicants
             </NavLink>
         </div>
         </nav>

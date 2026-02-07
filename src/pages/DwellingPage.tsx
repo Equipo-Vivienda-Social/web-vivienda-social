@@ -64,15 +64,15 @@ function DwellingPage() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: 'calc(100vh - 140px)', width: '100%', padding: '40px 20px', boxSizing: 'border-box', backgroundColor: '#F1FAEE' }}>
       <div style={{ textAlign: 'center', maxWidth: '1200px', width: '100%' }}>
-        <h1 style={{ marginBottom: '20px', color: "#1D3557", fontSize: "2.5rem" }}>Parque de Viviendas</h1>
+        <h1 style={{ marginBottom: '20px', color: "#1D3557", fontSize: "2.5rem" }}>Housing Stock</h1>
 
         <div style={{ backgroundColor: "white", padding: "20px", borderRadius: "12px", boxShadow: "0 4px 15px rgba(0,0,0,0.05)", marginBottom: "40px", display: "flex", flexWrap: "wrap", gap: "15px", alignItems: "center", justifyContent: "center", border: "1px solid #E0E0E0" }}>
-            <input type="text" placeholder="Filtrar por Ciudad..." value={filterCity} onChange={(e) => setFilterCity(e.target.value)} style={inputStyle} />
-            <input type="number" placeholder="Nº Habitaciones" value={filterRooms} onChange={(e) => setFilterRooms(e.target.value)} style={{...inputStyle, width: "120px"}} />
+            <input type="text" placeholder="Filter by City Name" value={filterCity} onChange={(e) => setFilterCity(e.target.value)} style={inputStyle} />
+            <input type="number" placeholder="Nº Rooms" value={filterRooms} onChange={(e) => setFilterRooms(e.target.value)} style={{...inputStyle, width: "120px"}} />
             <select value={filterAvailable} onChange={(e) => setFilterAvailable(e.target.value)} style={inputStyle}>
-                <option value="all">Todos los estados</option>
-                <option value="true">Disponible</option>
-                <option value="false">Ocupada</option>
+                <option value="all">All states</option>
+                <option value="true">Available</option>
+                <option value="false">Occupied</option>
             </select>
 
             {/* SELECT DE ORDENAMIENTO */}
@@ -81,20 +81,20 @@ function DwellingPage() {
               onChange={(e) => setSortOrder(e.target.value)} 
               style={{...inputStyle, border: "2px solid #457B9D"}}
             >
-                <option value="none">Sin orden específico</option>
-                <option value="asc">Orden: A-Z (Ciudad)</option>
-                <option value="desc">Orden: Z-A (Ciudad)</option>
+                <option value="none">No order </option>
+                <option value="asc">Order: A-Z (City)</option>
+                <option value="desc">Order: Z-A (City)</option>
             </select>
 
-            <button onClick={fetchDwellings} style={{ backgroundColor: "#1D3557", color: "white", border: "none", padding: "10px 20px", borderRadius: "6px", cursor: "pointer", fontWeight: "bold" }}>Buscar</button>
+            <button onClick={fetchDwellings} style={{ backgroundColor: "#1D3557", color: "white", border: "none", padding: "10px 20px", borderRadius: "6px", cursor: "pointer", fontWeight: "bold" }}>Search</button>
             
             {(filterCity || filterRooms || filterAvailable !== "all" || sortOrder !== "none") && (
-                <button onClick={() => { setFilterCity(""); setFilterRooms(""); setFilterAvailable("all"); setSortOrder("none"); }} style={{ backgroundColor: "#FFFFFF", color: "#E63946", border: "2px solid #E63946", padding: "8px 15px", borderRadius: "6px", cursor: "pointer", fontWeight: "bold", marginLeft: "10px" }}>Limpiar</button>
+                <button onClick={() => { setFilterCity(""); setFilterRooms(""); setFilterAvailable("all"); setSortOrder("none"); }} style={{ backgroundColor: "#FFFFFF", color: "#E63946", border: "2px solid #E63946", padding: "8px 15px", borderRadius: "6px", cursor: "pointer", fontWeight: "bold", marginLeft: "10px" }}>Clear</button>
             )}
         </div>
         
         {loading ? (
-          <div style={{ color: '#1D3557' }}>Cargando...</div>
+          <div style={{ color: '#1D3557' }}>Loading...</div>
         ) : (
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '25px', justifyContent: 'center' }}>
             {dwellings.map((dwelling) => (
@@ -102,12 +102,12 @@ function DwellingPage() {
                 <div>
                   <h3 style={{ margin: '0 0 15px 0', fontSize: '1.3rem', color: '#1D3557' }}>{dwelling.street}</h3>
                   <div style={{ fontSize: '15px', lineHeight: '1.6', color: "#457B9D" }}>
-                    <p style={{margin: '5px 0'}}><strong>Ciudad:</strong> {dwelling.city}</p>
-                    <p style={{margin: '5px 0'}}><strong>Habitaciones:</strong> {dwelling.room}</p>
+                    <p style={{margin: '5px 0'}}><strong>City:</strong> {dwelling.city}</p>
+                    <p style={{margin: '5px 0'}}><strong>Rooms:</strong> {dwelling.room}</p>
                   </div>
                 </div>
                 <div style={{ marginTop: '20px', padding: '10px', borderRadius: '8px', textAlign: 'center', fontWeight: 'bold', backgroundColor: dwelling.available ? '#A8DADC' : '#F4A261', color: dwelling.available ? '#1D3557' : '#991B1B' }}>
-                  {dwelling.available ? 'DISPONIBLE' : 'OCUPADA'}
+                  {dwelling.available ? 'AVAILABLE' : 'OCCUPIED'}
                 </div>
               </div>
             ))}
