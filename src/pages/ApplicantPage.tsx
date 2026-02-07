@@ -111,7 +111,7 @@ function ApplicantPage() {
                     />
 
                     <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
-                        <span style={{fontSize: "0.9rem", color: "#457B9D"}}>Salario min:</span>
+                        <span style={{fontSize: "0.9rem", color: "#457B9D"}}>Salario {'>'} : </span>
                         <input 
                             type="number" 
                             placeholder="Ej: 1500" 
@@ -167,7 +167,7 @@ function ApplicantPage() {
                                     DNI/NIE: <strong>{applicant.dni}</strong>
                                 </div>
                                 <div style={{ fontSize: '15px', lineHeight: '1.6', color: "#457B9D" }}>
-                                    <p style={{margin: '5px 0'}}><strong>Familia:</strong> {applicant.familyMenbers} miembros</p>
+                                    <p style={{margin: '5px 0'}}><strong>Familia:</strong> {applicant.familyMembers} miembros</p>
                                     <p style={{margin: '5px 0'}}><strong>Ingresos:</strong> {applicant.salary?.toLocaleString()} €/año</p>
                                 </div>
                             </div>

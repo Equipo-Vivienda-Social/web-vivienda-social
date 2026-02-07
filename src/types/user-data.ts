@@ -5,7 +5,7 @@ export interface Applicant {
     dni: string;
     birthDate: Date;
     salary: number;
-    familyMenbers: number;
+    familyMembers: number;
     employed: boolean;
 }
 

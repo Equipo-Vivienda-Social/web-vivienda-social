@@ -109,8 +109,8 @@ function DwellingPage() {
                 style={inputStyle}
             >
                 <option value="all">Todos los estados</option>
-                <option value="true">✅ Disponible</option>
-                <option value="false">❌ Ocupada</option>
+                <option value="true">Disponible</option>
+                <option value="false">Ocupada</option>
             </select>
 
             <button 
